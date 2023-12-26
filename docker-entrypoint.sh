@@ -1,5 +1,11 @@
 #!/bin/sh
 
-cd /app && git pull
+ls -la /app
+
+cd /app
+
+ls -la
+
+git pull
 
 nginx -g 'daemon off;'
