@@ -6,6 +6,7 @@ RUN apk --no-cache add git
 
 RUN git clone https://github.com/hari6091/frontend-ingress-react.git .
 
+RUN git pull
 RUN npm install
 RUN npm run build
 
@@ -16,8 +17,3 @@ EXPOSE 3000
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=builder /app/build /usr/share/nginx/html
-
-COPY ./docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
