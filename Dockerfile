@@ -6,6 +6,9 @@ RUN apk --no-cache add git
 
 RUN git clone https://github.com/hari6091/frontend-ingress-react.git .
 
+RUN npm install
+RUN npm run build
+
 FROM nginx
 
 EXPOSE 3000
