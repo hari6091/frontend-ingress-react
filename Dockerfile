@@ -15,4 +15,6 @@ COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=builder /app/build /usr/share/nginx/html
 
-CMD ["sh", "-c", "cd /app && git pull && npm install && npm run build && nginx -g 'daemon off;'"]
+WORKDIR /app
+
+CMD ["sh", "-c", "git pull && npm install && npm run build && nginx -g 'daemon off;'"]
