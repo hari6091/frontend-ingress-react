@@ -9,15 +9,15 @@ const MainComponent = () => {
   const getAllNumbers = useCallback(async () => {
     // we will use nginx to redirect it to the proper URL
     const data = await axios.get("/api/values/all");
-    setValues(data.data.rows.map(row => row.number));
+    setValues(data.data.rows.map((row) => row.number));
   }, []);
 
   const saveNumber = useCallback(
-    async event => {
+    async (event) => {
       event.preventDefault();
 
       await axios.post("/api/values", {
-        value
+        value,
       });
 
       setValue("");
@@ -28,27 +28,28 @@ const MainComponent = () => {
 
   useEffect(() => {
     getAllNumbers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
-      <button onClick={getAllNumbers}>Get all numbers</button>
+      <button onClick={getAllNumbers}>Listar todos os números</button>
       <br />
-      <span className="title">Values</span>
+      <span className="title">Valores</span>
       <div className="values">
-        {values.map(value => (
+        {values.map((value) => (
           <div className="value">{value}</div>
         ))}
       </div>
       <form className="form" onSubmit={saveNumber}>
-        <label>Enter your value: </label>
+        <label>Insira um valor: </label>
         <input
           value={value}
-          onChange={event => {
+          onChange={(event) => {
             setValue(event.target.value);
           }}
         />
-        <button>Submit</button>
+        <button>Enviar</button>
       </form>
     </div>
   );
